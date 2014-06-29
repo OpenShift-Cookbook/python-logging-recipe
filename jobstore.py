@@ -68,8 +68,13 @@ class Job(db.Model):
 		return Job(title=title, description=description)
 
 
+import logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 @app.route('/')
 def index():
+	logger.info('inside index()...')
 	return render_template('index.html')
 
 @app.route('/api/v1/companies', methods=['GET'])
