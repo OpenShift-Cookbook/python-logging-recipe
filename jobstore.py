@@ -69,6 +69,8 @@ class Job(db.Model):
 
 
 import logging
+import logging.handlers
+
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 log_location = os.environ.get('OPENSHIFT_LOG_DIR') if os.environ.get('OPENSHIFT_LOG_DIR') else '/tmp/'
