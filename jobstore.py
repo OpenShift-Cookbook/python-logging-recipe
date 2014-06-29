@@ -69,8 +69,12 @@ class Job(db.Model):
 
 
 import logging
-logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+log_location = os.environ.get('OPENSHIFT_LOG_DIR') if os.environ.get('OPENSHIFT_LOG_DIR') else '/tmp/'
+log_filename = log_location + 'jobstore.log'
+handler = logging.TimedRotatingFileHandler(log_filename,when='midnight',backupCount=5)
+logger.addHandler(handler)
 
 @app.route('/')
 def index():
